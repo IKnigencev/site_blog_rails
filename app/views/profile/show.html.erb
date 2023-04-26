@@ -1,0 +1,19 @@
+<h1>Профиль пользователя <%= @data[:user].email %></h1>
+
+<ul>
+  <p>Постов: <%= @data[:posts].count %></p>
+  <p>Просмотров: <%= @data[:views_count] %></p>
+  <p>Лайков: <%= @data[:likes_count] %></p>
+</ul>
+
+<% @data[:posts].each do |post| %>
+  <p>Название: <%= post.title %></p>
+  <p>Кратко: <%= post.text[0..150] %></p>
+  <p>Просмотров: <%= post.views %></p>
+  <p>Лайков: <%= post.likes %></p>
+  <p><%= link_to "Пост", show_post_path(id: post.id) %></p>
+  <% if current_user == post.author %>
+    <p><%= link_to "Редактировать пост", edit_post_path(post.id) %></p>
+  <% else %>
+  <% end %>
+<% end %>

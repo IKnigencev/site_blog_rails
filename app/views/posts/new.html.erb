@@ -1,0 +1,8 @@
+<h1>Создание поста</h1>
+
+<%= form_for @post do |f| %>
+  <%= f.file_field :image %>
+  <%= f.text_field :title %>
+  <%= f.text_area :text %>
+  <%= f.submit "Test" %>
+<% end %>

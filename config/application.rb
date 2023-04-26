@@ -17,8 +17,11 @@ module SiteBlogRails
       g.helper_specs    false
       g.factory_bot true
     end
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
+    config.i18n.default_locale = :ru
     config.active_job.queue_adapter = :resque
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.eager_load_paths << Rails.root.join("app/services")
+    config.eager_load_paths += %W(#{config.root}/lib)
 
     config.cache_store = :mem_cache_store
 

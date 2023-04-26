@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  # root 'home#index'
+  resources :posts, path: "/", except: :show
+  get "posts/:id", to: "posts#show", as: :show_post
 
-  devise_for :users, path: "", controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations",
-    passwords: "users/passwords"
-  }, skip: %i[registrations]
-  as :user do
-    get "/sign_up", to: "users/registrations#new", as: :new_user_registration
-  end
+  get "info/about", to: "info#about"
+  get "info/contact", to: "info#contact"
 
+  resources :profile, only: %i[show index]
 end

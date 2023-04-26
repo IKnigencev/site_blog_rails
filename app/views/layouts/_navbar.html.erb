@@ -1,0 +1,16 @@
+<nav>
+  <ul>
+    <li><%= link_to "Главная", posts_path %></li>
+    <li><%= link_to "Контакты", info_contact_path %></li>
+    <li><%= link_to "О проекте", info_about_path %></li>
+    <% if current_user.present? && user_signed_in? %>
+      <li><%= link_to "Новый пост", new_post_path %></li>
+      <li><%= link_to "Другие авторы", profile_index_path %></li>
+      <li><%= link_to "Профиль", profile_path(current_user.id) %></li>
+      <li><%= button_to "Выйти", destroy_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "Регистрация", new_user_registration_path, method: :get %></li>
+      <li><%= link_to "Войти", new_user_session_path, method: :get %></li>
+    <% end %>
+  </ul>
+</nav>

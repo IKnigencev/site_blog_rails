@@ -1,2 +1,5 @@
 ru:
-  hello: "Hello world"
+  post:
+    errors:
+      content_type: Неверный формат фото
+    success_create: Пост успешно создан

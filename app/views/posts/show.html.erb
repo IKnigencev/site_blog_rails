@@ -1,0 +1,14 @@
+<h1>Просмотр поста</h1>
+
+<% if @post.image.present? %>
+  <%= link_to @post.image, target: "_blank" do %>
+    <%= image_tag @post.image, class: "passport-verification__document-img" %>
+  <% end %>
+<% else %>
+    <p class="">Фото не найдено</p>
+<% end %>
+
+<h4><%= @post.title %></h4>
+<h4><%= @post.text %></h4>
+<h4><%= @post.views %></h4>
+<h4><%= @post.likes %></h4>
