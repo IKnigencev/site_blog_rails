@@ -1,12 +1,13 @@
 <h1>Другие авторы</h1>
 
-<% @authors.each do |author| %>
-  <% if author == current_user %>
-    <% next %>
+<% if @authors.count == 0 %>
+  <%= render "common/empty_list" %>
+<% else %>
+  <% @authors.each do |author| %>
+    <p><%= author.email %></p>
+    <p>Постов: <%= author.posts.count %></p>
+    <p>Просмотров: <%= author.sum_views %></p>
+    <p>Лайков: <%= author.sum_likes %></p>
+    <p><%= link_to "Профиль автора", profile_path(author.id) %></p>
   <% end %>
-  <p><%= author.email %></p>
-  <p>Постов: <%= author.posts.count %></p>
-  <p>Просмотров: <%= author.sum_views %></p>
-  <p>Лайков: <%= author.sum_likes %></p>
-  <p><%= link_to "Профиль автора", profile_path(author.id) %></p>
 <% end %>

@@ -17,3 +17,6 @@
   <%= button_to "Редактировать пост", edit_post_path(@post.id), method: :get %>
   <%= button_to "Удалить пост", posts_path(@post.id), method: :delete %>
 <% end %>
+
+<h3>Комментарии:</h3>
+<%= render "comments/list_comments", locals: { post: @post } %>

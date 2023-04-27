@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :comments
   validates_presence_of :title, :text
+  validates :title, length: { maximum: 150 }
+  validates :text, length: { maximum: 10_000 }
   validate :image_valid, if: proc { image.present? }
 
   ACCESS_FILE_TYPE = %w[

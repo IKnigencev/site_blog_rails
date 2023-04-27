@@ -1,0 +1,18 @@
+<%= form_for :comment, url: post_comments_path(@post.id), method: :post, remote: true do |f| %>
+  <%= f.text_area :text, maxlength: 300 %>
+  <%= f.submit "Test" %>
+<% end %>
+<% if @post.comments.count == 0 %>
+  <%= render "common/empty_list" %>
+<% else %>
+  <% @post.comments.each do |comment| %>
+    <div>
+      <p><%= comment.text %></p>
+      <p><%= comment.author.email %></p>
+      <p><%= button_to comment.likes, increment_likes_comment_path(post_id: @post.id, id: comment.id), method: :post %></p>
+      <% if current_user == comment.author %>
+        <p><%= button_to "Удалить комментарий", post_comment_path(post_id: @post.id, id: comment.id), method: :delete %></p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

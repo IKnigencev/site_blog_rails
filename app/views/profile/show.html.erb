@@ -1,20 +1,30 @@
-<h1>Профиль пользователя <%= @data[:user].email %></h1>
+<% if current_user == @data[:user] %>
+  <h1>Ваш профиль</h1>
+<% else %>
+  <h1>Профиль пользователя <%= @data[:user].email %></h1>
+<% end %>
 
 <ul>
-  <p>Постов: <%= @data[:posts].count %></p>
-  <p>Просмотров: <%= @data[:views_count] %></p>
-  <p>Лайков: <%= @data[:likes_count] %></p>
+  <li>Почта: <%= @data[:user].email %></li>
+  <li>Постов: <%= @data[:posts].count %></li>
+  <li>Просмотров: <%= @data[:views_count] || 0 %></li>
+  <li>Лайков: <%= @data[:likes_count] || 0 %></li>
 </ul>
 
-<% @data[:posts].each do |post| %>
-  <p>Название: <%= post.title %></p>
-  <p>Кратко: <%= post.text[0..150] %></p>
-  <p>Просмотров: <%= post.views %></p>
-  <p>Лайков: <%= post.likes %></p>
-  <p><%= link_to "Пост", show_post_path(id: post.id) %></p>
-  <% if current_user == post.author %>
-    <p><%= link_to "Редактировать пост", edit_post_path(post.id) %></p>
-    <%= button_to "Удалить пост", posts_path(post.id), method: :delete %>
-  <% else %>
+<h3>Посты:</h3>
+<% if @data[:posts].count == 0 %>
+  <%= render "common/empty_list" %>
+<% else %>
+  <% @data[:posts].each do |post| %>
+    <p>Название: <%= post.title %></p>
+    <p>Кратко: <%= post.text[0..150] %></p>
+    <p>Просмотров: <%= post.views %></p>
+    <p>Лайков: <%= post.likes %></p>
+    <p><%= link_to "Пост", show_post_path(id: post.id) %></p>
+    <% if current_user == post.author %>
+      <p><%= link_to "Редактировать пост", edit_post_path(post.id) %></p>
+      <%= button_to "Удалить пост", posts_path(post.id), method: :delete %>
+    <% else %>
+    <% end %>
   <% end %>
 <% end %>

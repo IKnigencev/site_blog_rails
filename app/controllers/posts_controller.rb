@@ -47,13 +47,24 @@ class PostsController < ApplicationController
   ##
   # PATCH /:id
   def update
-
+    service = PostsServices.new(
+      user: current_user,
+      data: create_params
+    ).update_post
+    if service.success?
+      flash[:notice] = service.value!
+      redirect_to posts_path, status: :created
+    else
+      flash[:alert] = service.failure[:error]
+      @post = Post.new
+      render :new, status: :unprocessable_entity
+    end
   end
 
   ##
   # GET /:id/edit
   def edit
-
+    render :new
   end
 
   ##

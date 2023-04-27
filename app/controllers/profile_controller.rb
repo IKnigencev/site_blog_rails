@@ -7,7 +7,7 @@ class ProfileController < ApplicationController
   ##
   # GET /profile
   def index
-    @authors = User.with_posts
+    @authors = User.where.not(posts: { user_id: current_user.id }).with_posts
   end
 
   ##
