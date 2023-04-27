@@ -3,6 +3,7 @@ ru:
     errors:
       content_type: Неверный формат фото
     success_create: Пост успешно создан
+    success_update: Пост успешно обновлен
   likes:
     save:
       success: Данные обновлены

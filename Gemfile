@@ -31,6 +31,10 @@ gem "rails-i18n"
 gem "resque"
 gem "resque-scheduler"
 
+gem "activeadmin"
+
+gem "sassc"
+
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 

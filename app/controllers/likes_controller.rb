@@ -12,11 +12,10 @@ class LikesController < ApplicationController
       user: current_user,
       post: @post
     ).likes_post
-    puts show_posts_path(@post.id)
     if service.success?
-      render show_posts_path(@post.id), status: :created
+      redirect_to url_for(controller: :posts, action: :show, id: @post.id)
     else
-      render show_posts_path(@post.id), status: :not_found 
+      redirect_to url_for(controller: :posts, action: :show, id: @post.id)
     end
   end
 
@@ -29,9 +28,9 @@ class LikesController < ApplicationController
       comment: @comment
     ).like_comment
     if service.success?
-      render show_posts_path(@post.id), status: :created
+      redirect_to url_for(controller: :posts, action: :show, id: @post.id)
     else
-      render show_posts_path(@post.id), status: :not_found  
+      redirect_to url_for(controller: :posts, action: :show, id: @post.id)
     end
   end
 

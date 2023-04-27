@@ -4,7 +4,6 @@ class CreatePost < ActiveRecord::Migration[7.0]
       t.references :user, index: true
       t.string :title,    null: false
       t.text :text,       null: false
-      t.integer :views,   default: 0
 
       t.timestamps
     end

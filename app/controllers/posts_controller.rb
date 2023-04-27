@@ -15,10 +15,12 @@ class PostsController < ApplicationController
   def show
     return not_found if @post.blank?
 
-    PostsServices.new(
-      user: current_user,
-      data: @post
-    ).show
+    if current_user.present?
+      PostsServices.new(
+        user: current_user,
+        post: @post
+      ).show
+    end
   end
 
   ##
@@ -49,14 +51,14 @@ class PostsController < ApplicationController
   def update
     service = PostsServices.new(
       user: current_user,
-      data: create_params
+      data: create_params,
+      post: @post
     ).update_post
     if service.success?
       flash[:notice] = service.value!
-      redirect_to posts_path, status: :created
+      redirect_to url_for(controller: :posts, action: :show, id: @post.id)
     else
       flash[:alert] = service.failure[:error]
-      @post = Post.new
       render :new, status: :unprocessable_entity
     end
   end

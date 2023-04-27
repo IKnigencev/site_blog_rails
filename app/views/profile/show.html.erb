@@ -7,8 +7,8 @@
 <ul>
   <li>Почта: <%= @data[:user].email %></li>
   <li>Постов: <%= @data[:posts].count %></li>
-  <li>Просмотров: <%= @data[:views_count] || 0 %></li>
-  <li>Лайков: <%= @data[:likes_count] || 0 %></li>
+  <li>Просмотров: <%= @data[:views_count] %></li>
+  <li>Лайков: <%= @data[:likes_count] %></li>
 </ul>
 
 <h3>Посты:</h3>
@@ -20,7 +20,7 @@
     <p>Кратко: <%= post.text[0..150] %></p>
     <p>Просмотров: <%= post.views %></p>
     <p>Лайков: <%= post.likes %></p>
-    <p><%= link_to "Пост", show_post_path(id: post.id) %></p>
+    <p><%= link_to "Пост", show_posts_path(id: post.id) %></p>
     <% if current_user == post.author %>
       <p><%= link_to "Редактировать пост", edit_post_path(post.id) %></p>
       <%= button_to "Удалить пост", post_path(post.id), method: :delete %>

@@ -33,6 +33,6 @@ class DataUser
     ##
     # Все посты юзера
     def posts
-      user.posts
+      user.posts.sort_by(&:created_at)
     end
 end

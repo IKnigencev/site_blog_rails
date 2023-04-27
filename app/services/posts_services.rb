@@ -4,12 +4,18 @@ class PostsServices
   include Dry::Monads[:result]
   extend Dry::Initializer
   option :user
-  option :data
+  option :data, optional: true, default: nil
+  option :post, optional: true, default: nil
 
+  ##
+  # Обновление просмотров
   def show
-    return if data.author == user
+    return if post.author == user
 
-    data.increment!(:views)
+    @view = View.find_or_initialize_by(user: user, post: post)
+    return unless @view.new_record?
+
+    @view.save!
   end
 
   ##
@@ -22,6 +28,18 @@ class PostsServices
     @post.save!
     Success.new(
       message: I18n.t("post.success_create")
+    )
+  end
+
+  ##
+  # Обновление поста
+  def update_post
+    res_valid = validate_data
+    return res_valid if res_valid.is_a?(Failure)
+
+    @post.save!
+    Success.new(
+      message: I18n.t("post.success_update")
     )
   end
 

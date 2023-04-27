@@ -7,18 +7,20 @@ class User < Core::User
   has_many :comments
   validates :email, uniqueness: true
   scope :with_posts, -> { joins(:posts).where.not(posts: { id: nil }).uniq }
-  
+
   ##
   # Сумма просмотров
   def sum_views
-    return if posts.blank?
- 
-    posts.select(:views).sum(:views)
+    return 0 if posts.blank?
+
+    View.where(post_id: posts.pluck(:id)).where.not(user_id: nil).count
   end
 
   ##
   # Колличество лайков под постами юзера
   def post_sum_likes
-    Like.where(user_id: self.id).where.not(post_id: nil).count
+    return 0 if posts.blank?
+
+    Like.where(post_id: posts.pluck(:id)).where.not(user_id: nil).count
   end
 end

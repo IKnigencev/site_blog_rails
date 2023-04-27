@@ -27,6 +27,12 @@ class Post < ApplicationRecord
     Like.where(post_id: self.id).count
   end
 
+  ##
+  # Коллиыество просмотров
+  def views
+    View.where(post_id: self.id).count
+  end
+
   private
     ##
     # Проверка типа файла

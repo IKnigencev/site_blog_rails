@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get "posts/:id", to: "posts#show", as: :show_posts
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  get "/posts/:id", to: "posts#show", as: :show_posts
   devise_for :users
   resources :posts, path: "/", except: :show do
     resources :comments, except: :new
@@ -8,8 +10,8 @@ Rails.application.routes.draw do
   post "/:post_id/comments/:id/likes", to: "likes#likes_comment", as: :like_comment
 
 
-  get "info/about", to: "info#about"
-  get "info/contact", to: "info#contact"
+  get "/info/about", to: "info#about"
+  get "/info/contact", to: "info#contact"
 
   resources :profile, only: %i[show index]
 end
