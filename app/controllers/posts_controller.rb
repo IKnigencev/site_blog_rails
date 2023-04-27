@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update new create destory]
-  before_action :set_post, only: %i[edit show]
+  before_action :set_post, only: %i[edit show destroy update]
 
   ##
   # GET /
@@ -42,6 +42,27 @@ class PostsController < ApplicationController
       @post = Post.new
       render :new, status: :unprocessable_entity
     end
+  end
+
+  ##
+  # PATCH /:id
+  def update
+
+  end
+
+  ##
+  # GET /:id/edit
+  def edit
+
+  end
+
+  ##
+  # DELETE /:id
+  def destroy
+    head :forbidden && return unless current_user == @post.author
+
+    @post.destory
+    head :ok
   end
 
   private
