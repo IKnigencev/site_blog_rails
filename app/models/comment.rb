@@ -10,4 +10,10 @@ class Comment < ApplicationRecord
   def author
     self.user
   end
+
+  ##
+  # Колличество лайков
+  def likes
+    Like.where(comment_id: self.id).count
+  end
 end

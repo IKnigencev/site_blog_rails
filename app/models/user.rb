@@ -17,10 +17,8 @@ class User < Core::User
   end
 
   ##
-  # Сумма лайков
-  def sum_likes
-    return if posts.blank?
-
-    posts.select(:likes).sum(:likes)
+  # Колличество лайков под постами юзера
+  def post_sum_likes
+    Like.where(user_id: self.id).where.not(post_id: nil).count
   end
 end

@@ -5,7 +5,6 @@ class CreatePost < ActiveRecord::Migration[7.0]
       t.string :title,    null: false
       t.text :text,       null: false
       t.integer :views,   default: 0
-      t.integer :likes,   default: 0
 
       t.timestamps
     end

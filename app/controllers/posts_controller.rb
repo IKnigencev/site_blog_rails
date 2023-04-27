@@ -72,7 +72,7 @@ class PostsController < ApplicationController
   def destroy
     head :forbidden && return unless current_user == @post.author
 
-    @post.destory
+    @post.destroy!
     head :ok
   end
 

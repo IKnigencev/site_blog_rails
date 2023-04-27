@@ -12,10 +12,10 @@
 <h4><%= @post.text %></h4>
 <h4><%= @post.views %></h4>
 <h4><%= @post.likes %></h4>
-
+<h4><%= button_to "Лайк", like_posts_path(@post.id), method: :post %></h4>
 <% if current_user == @post.author %>
   <%= button_to "Редактировать пост", edit_post_path(@post.id), method: :get %>
-  <%= button_to "Удалить пост", posts_path(@post.id), method: :delete %>
+  <%= button_to "Удалить пост", post_path(@post.id), method: :delete %>
 <% end %>
 
 <h3>Комментарии:</h3>

@@ -4,7 +4,6 @@ class CreateComment < ActiveRecord::Migration[7.0]
       t.references :post,   index: true
       t.references :user,   index: true
       t.text       :text,   null: false
-      t.integer    :likes,  default: 0
 
       t.timestamps
     end

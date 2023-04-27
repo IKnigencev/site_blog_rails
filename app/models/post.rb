@@ -21,6 +21,12 @@ class Post < ApplicationRecord
     self.user
   end
 
+  ##
+  # Колличество лайков
+  def likes
+    Like.where(post_id: self.id).count
+  end
+
   private
     ##
     # Проверка типа файла

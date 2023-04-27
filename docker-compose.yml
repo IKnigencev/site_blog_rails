@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: postgres
+    volumes:
+      - ~/Documents/storage/docker/postgresql/gudok/db:/var/lib/postgresql/data
+    command: ''
+    environment:
+      - POSTGRES_USER=blog
+      - POSTGRES_PASSWORD=blog
+    ports:
+      - 3318:3318
+    container_name: db_postgres
+  redis:
+    image: "redis:alpine"
+    command: --port 6389
+    expose:
+      - 6389
+    ports:
+      - 6389:6389
+  web:
+    restart: always
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app:cached
+      - gem_cache:/gems
+    build: .
+    entrypoint: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      RAILS_ENV: development
+      DB_PORT: 3318
+      DB_USER: blog
+      DB_PASSWORD: blog
+      REDIS_PORT: 6389
+volumes:
+  gem_cache:

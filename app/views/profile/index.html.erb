@@ -7,7 +7,7 @@
     <p><%= author.email %></p>
     <p>Постов: <%= author.posts.count %></p>
     <p>Просмотров: <%= author.sum_views %></p>
-    <p>Лайков: <%= author.sum_likes %></p>
+    <p>Лайков: <%= author.post_sum_likes %></p>
     <p><%= link_to "Профиль автора", profile_path(author.id) %></p>
   <% end %>
 <% end %>

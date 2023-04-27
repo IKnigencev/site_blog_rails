@@ -27,7 +27,7 @@ class DataUser
     ##
     # Колличество лайков
     def likes_count
-      user.sum_likes
+      user.post_sum_likes
     end
 
     ##
