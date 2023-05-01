@@ -1,10 +1,31 @@
-FROM ruby:3.1.2-slim
+FROM ruby:3.1.2-alpine
 
+RUN apk add --update --no-cache \
+      binutils-gold \
+      build-base \
+      curl \
+      file \
+      g++ \
+      gcc \
+      git \
+      less \
+      libstdc++ \
+      libffi-dev \
+      libc-dev \ 
+      linux-headers \
+      libxml2-dev \
+      libxslt-dev \
+      libgcrypt-dev \
+      make \
+      netcat-openbsd \
+      openssl \
+      pkgconfig \
+      postgresql-dev \
+      tzdata
 WORKDIR /app
-COPY Gemfile Gemfile.lock /app/
-RUN apt-get install ruby-full build-essential
-RUN gem update --system
-RUN apt-get update -y && bundle install
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN gem update --system && bundle install
+COPY . /app
 
-
-CMD bundle exec rails s -b 0.0.0.0 -p 3000
+ENTRYPOINT ["sh", "./docker-entrypoint.sh"]

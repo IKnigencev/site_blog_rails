@@ -3,11 +3,15 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update new create destory]
   before_action :set_post, only: %i[edit show destroy update]
+  before_action :set_pagination, only: :index
 
   ##
   # GET /
   def index
-    @posts = Post.all
+    @posts = PostsServices.new(
+      user: current_user,
+      data: data_for_index
+    ).posts_for_index
   end
 
   ##
@@ -72,18 +76,40 @@ class PostsController < ApplicationController
   ##
   # DELETE /:id
   def destroy
-    head :forbidden && return unless current_user == @post.author
+    redirect_to action: "show", id: @post.id && return unless current_user == @post.author
 
     @post.destroy!
-    head :ok
+    redirect_to action: "index"
   end
 
   private
-    def set_post
-      @post ||= Post.find_by(id: params[:id])
+    ##
+    # Пагинация постов на главной странице
+    def set_pagination
+      @page = params[:page].to_i || 0
+      @prev_page = @page.present? && @page != 0 ? @page - 1 : 0
+      @next_page = @page.present? ? @page + 1 : 0
     end
 
+    ##
+    # Поиск поста по id
+    def set_post
+      @post ||= Post.find_by(id: params[:id])
+      return not_found if @post.blank?
+    end
+
+    ##
+    # Данные для создания поста
     def create_params
       params.require(:post).permit(:text, :title, :image)
+    end
+
+    ##
+    # Подготовка данных для сервиса
+    def data_for_index
+      {
+        filter: params[:filter],
+        page: @page
+      }
     end
 end

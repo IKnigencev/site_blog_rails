@@ -22,7 +22,6 @@ module SiteBlogRails
     config.active_job.queue_adapter = :resque
     config.eager_load_paths << Rails.root.join("app/services")
     config.eager_load_paths += %W(#{config.root}/lib)
-
     config.cache_store = :mem_cache_store
 
     config.action_mailer.perform_deliveries = true

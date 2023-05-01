@@ -1,0 +1,5 @@
+<%= link_to 'Prev 10', posts_path(page: @prev_page) %>
+
+<% if !@posts.count.zero? %>
+<%= link_to 'Next 10', posts_path(page: @next_page) %>
+<% end %>

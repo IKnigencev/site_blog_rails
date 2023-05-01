@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_27_194157) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -66,8 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_194157) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
+    t.bigint "post_id"
+    t.bigint "user_id"
     t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,9 +79,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_194157) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id"
-    t.integer "comment_id"
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.bigint "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_likes_on_comment_id"
@@ -87,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_194157) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "title", null: false
     t.text "text", null: false
     t.datetime "created_at", null: false
@@ -108,8 +111,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_194157) do
   end
 
   create_table "views", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id", null: false
+    t.bigint "user_id"
+    t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_views_on_post_id"

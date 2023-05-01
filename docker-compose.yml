@@ -5,23 +5,21 @@ services:
     restart: always
     image: postgres
     volumes:
-      - ~/Documents/storage/docker/postgresql/gudok/db:/var/lib/postgresql/data
-    command: ''
+      - db_value:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=blog
       - POSTGRES_PASSWORD=blog
     ports:
-      - 3318:3318
+      - 5432:5432
     container_name: db_postgres
   redis:
-    image: "redis:alpine"
-    command: --port 6389
-    expose:
-      - 6389
+    image: "redis:7-alpine"
     ports:
-      - 6389:6389
+      - 6379:6379
   web:
     restart: always
+    stdin_open: true
+    tty: true 
     depends_on:
       - db
       - redis
@@ -29,14 +27,14 @@ services:
       - .:/app:cached
       - gem_cache:/gems
     build: .
-    entrypoint: Dockerfile
+    entrypoint: sh ./docker-entrypoint.sh
     ports:
-      - '3000:3000'
+      - 3000:3000
     environment:
       RAILS_ENV: development
       DB_PORT: 3318
       DB_USER: blog
       DB_PASSWORD: blog
-      REDIS_PORT: 6389
 volumes:
   gem_cache:
+  db_value:

@@ -1,0 +1,4 @@
+<%= link_to "Все", posts_path %>
+<% if user_signed_in? %>
+<%= link_to "Мои", posts_path(filter: :by_user) %>
+<% end %>
