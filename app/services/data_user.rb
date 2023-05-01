@@ -10,11 +10,17 @@ class DataUser
   # Данные пользователя
   def data
     {
-      views_count: views_count,
-      likes_count: likes_count,
-      posts: posts,
-      user: user
+      views_count:,
+      likes_count:,
+      posts:,
+      user:
     }
+  end
+
+  ##
+  # Список всех авторов с постами
+  def authors_profile
+    User.where.not(posts: { user_id: user.id }).with_posts
   end
 
   private

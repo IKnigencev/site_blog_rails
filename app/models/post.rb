@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_many :comments
-  validates_presence_of :title, :text
+  validates :title, :text, presence: true
   validates :title, length: { maximum: 150 }
   validates :text, length: { maximum: 10_000 }
   validate :image_valid, if: proc { image.present? }
@@ -18,19 +18,19 @@ class Post < ApplicationRecord
   ##
   # Автор поста
   def author
-    self.user
+    user
   end
 
   ##
   # Колличество лайков
   def likes
-    Like.where(post_id: self.id).count
+    Like.where(post_id: id).count
   end
 
   ##
   # Коллиыество просмотров
   def views
-    View.where(post_id: self.id).count
+    View.where(post_id: id).count
   end
 
   private

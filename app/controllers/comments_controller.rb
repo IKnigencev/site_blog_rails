@@ -6,31 +6,22 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[destroy edit update]
 
   ##
+  # GET /:post_id/comments/:id
+  def edit
+    render template: "posts/show", locales: { post: @post, comment: @comment }
+  end
+
+  ##
   # POST /:post_id/comments
   def create
     @comment = @post.comments.new(user: current_user, **create_comment)
     if @comment.valid?
       @comment.save!
-      redirect_to_post 
+      redirect_to_post
     else
       flash[:alert] = @comment.errors.messages
-      redirect_to_post 
+      redirect_to_post
     end
-  end
-
-  ##
-  # DELETE /:post_id/comments/:id
-  def destroy
-    redirect_to_post && return unless @comment.author == current_user
-
-    @comment.destroy
-    redirect_to_post
-  end
-
-  ##
-  # GET /:post_id/comments/:id
-  def edit
-    render template: "posts/show", locales: { post: @post, comment: @comment }
   end
 
   ##
@@ -45,12 +36,21 @@ class CommentsController < ApplicationController
     redirect_to_post
   end
 
+  ##
+  # DELETE /:post_id/comments/:id
+  def destroy
+    redirect_to_post && return unless @comment.author == current_user
+
+    @comment.destroy
+    redirect_to_post
+  end
+
   private
     def set_post
       @post ||= Post.find_by(id: params[:post_id])
       return not_found if @post.blank?
     end
-    
+
     def set_comment
       @comment ||= @post.comments.find_by(id: params[:id])
       return not_found if @comment.blank?

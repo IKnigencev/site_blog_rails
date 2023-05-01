@@ -19,18 +19,24 @@ class PostsController < ApplicationController
   def show
     return not_found if @post.blank?
 
-    if current_user.present?
-      PostsServices.new(
-        user: current_user,
-        post: @post
-      ).show
-    end
+    return unless current_user.present?
+
+    PostsServices.new(
+      user: current_user,
+      post: @post
+    ).show
   end
 
   ##
   # GET /new
   def new
     @post = Post.new
+  end
+
+  ##
+  # GET /:id/edit
+  def edit
+    render :new
   end
 
   ##
@@ -65,12 +71,6 @@ class PostsController < ApplicationController
       flash[:alert] = service.failure[:error]
       render :new, status: :unprocessable_entity
     end
-  end
-
-  ##
-  # GET /:id/edit
-  def edit
-    render :new
   end
 
   ##

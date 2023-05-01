@@ -16,7 +16,7 @@ class LikesServices
 
     destroy_like
   end
-  
+
   ##
   # Поставить/убрать лайк с комментария
   def like_comment
@@ -30,9 +30,9 @@ class LikesServices
     # Поиск или создание Like
     def like
       @like ||= if comment.present?
-       Like.find_or_initialize_by(user: user, comment: comment)
+        Like.find_or_initialize_by(user:, comment:)
       else
-        Like.find_or_initialize_by(user: user, post: post)
+        Like.find_or_initialize_by(user:, post:)
       end
     end
 
@@ -63,6 +63,6 @@ class LikesServices
     end
 
     def error
-      Failure.new({error: like.errors.messages })
+      Failure.new({ error: like.errors.messages })
     end
 end

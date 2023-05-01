@@ -8,12 +8,12 @@ class Comment < ApplicationRecord
   ##
   # Автор комментария
   def author
-    self.user
+    user
   end
 
   ##
   # Колличество лайков
   def likes
-    Like.where(comment_id: self.id).count
+    Like.where(comment_id: id).count
   end
 end

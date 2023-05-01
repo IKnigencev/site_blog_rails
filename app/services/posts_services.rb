@@ -17,7 +17,7 @@ class PostsServices
   def show
     return if post.author == user
 
-    @view = View.find_or_initialize_by(user: user, post: post)
+    @view = View.find_or_initialize_by(user:, post:)
     return unless @view.new_record?
 
     @view.save!
@@ -65,7 +65,7 @@ class PostsServices
     ##
     # Валидности данных
     def validate_data
-      @post.assign_attributes(user: user, **data)
+      @post.assign_attributes(user:, **data)
       return if @post.valid?
 
       Failure.new({ error: @post.errors.messages })
