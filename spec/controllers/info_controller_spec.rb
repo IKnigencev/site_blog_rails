@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe InfoController, type: :controller do
-
   describe "#contact" do
     it "вернет статус 200" do
       get :contact
@@ -11,7 +10,7 @@ RSpec.describe InfoController, type: :controller do
     end
   end
 
-	describe "#about" do
+  describe "#about" do
     it "вернет статус 200" do
       get :about
       expect(response.status).to eq(200)

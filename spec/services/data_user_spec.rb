@@ -13,11 +13,11 @@ RSpec.describe DataUser do
     before do
       create_list(:user, rand(2..5))
       other_author = create(:user)
-      create(:post, user: user)
+      create(:post, user:)
     end
 
     it "вернет список юзеров у которых есть посты" do
-      res = DataUser.new(user: user).authors_profile
+      res = DataUser.new(user:).authors_profile
       expect(res).to eq(authors_list)
     end
   end

@@ -7,21 +7,28 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "main" %>
     <%= javascript_importmap_tags %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
 
   <body>
-    <%= render "layouts/navbar" %>
-    <% flash.each do |type, msg| %>
-      <% if type == "notice" %>
-        <div class="notice"><%= msg %></div>
-      <% else %>
-        <div class="alert"><%= msg %></div>
-      <% end %>
-    <% end %>
+    <header>
+      <%= render "layouts/navbar" %>
+    </header>
+    <main>
+      <div class="container">
+        <% flash.each do |type, msg| %>
+          <% if type == "notice" %>
+            <div class="notice"><%= msg %></div>
+          <% else %>
+            <div class="alert"><%= msg %></div>
+          <% end %>
+        <% end %>
 
-    <%= yield %>
+        <%= yield %>
+      </div>
+    </main>
   </body>
   <script>
     $('document').ready(function() {

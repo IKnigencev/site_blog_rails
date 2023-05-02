@@ -107,7 +107,6 @@ RSpec.describe PostsServices do
     before do
       create_list(:post, rand(10..15), user:)
       create_list(:post, rand(10..15))
-      data = { page: 0 }
       @res_filter = described_class.new(
         user:,
         data: { page: 0, filter: "by_user" }

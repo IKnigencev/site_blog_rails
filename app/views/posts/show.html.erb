@@ -1,18 +1,21 @@
-<h1>Просмотр поста</h1>
+<%= stylesheet_link_tag "posts/show" %>
+
+<div class="info_block">
+  <h1 class="post_title"><%= @post.title %></h1>
+</div>
 
 <% if @post.image.present? %>
   <%= link_to @post.image, target: "_blank" do %>
     <%= image_tag @post.image, class: "passport-verification__document-img" %>
   <% end %>
 <% else %>
-    <p class="">Фото не найдено</p>
+  <%= image_tag "noimg.jpg", class: "post_noimg" %>
 <% end %>
 
-<h4><%= @post.title %></h4>
-<h4><%= @post.text %></h4>
-<h4><%= @post.views %></h4>
-<h4><%= @post.likes %></h4>
-<h4><%= button_to "Лайк", like_posts_path(@post.id), method: :post %></h4>
+<p><%= @post.text %></p>
+<p><%= @post.views %></p>
+<p><%= @post.likes %></p>
+<p><%= button_to "Лайк", like_posts_path(@post.id), method: :post %></p>
 <% if current_user == @post.author %>
   <%= button_to "Редактировать пост", edit_post_path(@post.id), method: :get %>
   <%= button_to "Удалить пост", post_path(@post.id), method: :delete %>

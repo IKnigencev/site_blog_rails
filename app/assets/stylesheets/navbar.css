@@ -1,0 +1,27 @@
+.nav_ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.nav_li {
+    float: left;
+}
+
+.nav_li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav_li:last-child {
+    float: right;
+}
+
+.nav_li .no_auth {
+    margin-top: 14px;
+}

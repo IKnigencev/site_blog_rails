@@ -18,7 +18,7 @@ RSpec.describe ProfileController, type: :controller do
 
   describe "#show" do
     it "если передан не верный id юзера вернет 404" do
-      expect { get :show, params: { id: rand(1_000..2_000) } }.to raise_error(ActionController::RoutingError)
+      expect { get :show, params: { id: rand(0...user.id) } }.to raise_error(ActionController::RoutingError)
     end
 
     it "если верно передан id юзера вернет статус 200" do

@@ -76,7 +76,7 @@ class PostsController < ApplicationController
   ##
   # DELETE /:id
   def destroy
-    redirect_to action: "show", id: @post.id && return unless current_user == @post.author
+    return not_found unless current_user == @post.author
 
     @post.destroy!
     redirect_to action: "index"

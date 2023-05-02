@@ -1,24 +1,20 @@
-# README
+# Сайт-блог
+Блог в котором омжно создавать новые посты, оставлять комментарии, ставить лайки, сммотреть посты других авторов и т.д.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Технологии
+* Ruby - 3.1.2
+* Ruby on Rails - 7.0.3
+* Redis
+* PostgreSql
+* Docker
 
-Things you may want to cover:
+## Инструкция по использованию
 
-* Ruby version
+#### Запуск:
+* Команда для запуска проекта: `docker-compose up`. Открыть можно по данной ссылке: `http://0.0.0.0:3000/`
+* Тестовый данные для входа: 
+    * `email: test@mail.ru`
+    * `password: test_password`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Тесты:
+* После запуска `docker-compose up`, нужно выполнить команду в другом терминале `docker-compose exec web rspec spec`

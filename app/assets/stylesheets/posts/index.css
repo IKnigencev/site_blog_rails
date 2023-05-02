@@ -1,0 +1,13 @@
+.main_title {
+    text-align: center;
+}
+
+.block_posts_list {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row_post {
+    margin: 10px;
+}

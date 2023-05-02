@@ -1,11 +1,11 @@
 <% if @comment.present? %>
     <%= form_for @comment, url: post_comment_path(post_id: @post.id, id: @comment.id), method: :patch, remote: true do |f| %>
     <%= f.text_area :text, value: @comment[:text], maxlength: 300 %>
-    <%= f.submit "Test" %>
+    <%= f.submit "Редактировать комментарий" %>
     <% end %>
 <% else %>
     <%= form_for :comment, url: post_comments_path(@post.id), method: :post, remote: true do |f| %>
     <%= f.text_area :text, maxlength: 300 %>
-    <%= f.submit "Test" %>
+    <%= f.submit "Комментировать" %>
     <% end %>
 <% end %>

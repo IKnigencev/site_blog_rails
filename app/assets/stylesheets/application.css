@@ -12,4 +12,6 @@
  *
  *= require_tree .
  *= require_self
+ //= link posts/show.css
+ //= link posts/index.css
  */

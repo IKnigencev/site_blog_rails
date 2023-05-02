@@ -1,0 +1,14 @@
+.post_noimg {
+    width: 500px;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info_block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+

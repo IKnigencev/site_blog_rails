@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
   ##
   # DELETE /:post_id/comments/:id
   def destroy
-    redirect_to_post && return unless @comment.author == current_user
+    return not_found unless @comment.author == current_user
 
     @comment.destroy
     redirect_to_post
